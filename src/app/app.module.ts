@@ -4,6 +4,7 @@ import { NoteHomeComponent } from './notes/note-home/note-home.component';
 import { MainLayoutComponent } from './notes/main-layout/main-layout.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -18,7 +19,7 @@ import { Game1Component } from './game1/game1.component';
     NoteCardComponent,
     NoteDetailsComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
