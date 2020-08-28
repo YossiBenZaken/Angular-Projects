@@ -1,6 +1,6 @@
 import { NotesService } from './../shared/notes.service';
 import { Note } from './../shared/note.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {
   trigger,
   transition,
@@ -91,12 +91,66 @@ import {
 })
 export class NoteHomeComponent implements OnInit {
   notes: Note[] = new Array<Note>();
+  filteredNotes: Note[] = new Array<Note>();
+  @ViewChild('filterInput') filterInputElRef: ElementRef<HTMLInputElement>;
   constructor(private notesService: NotesService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.notes = this.notesService.getAll();
+    this.filter('');
   }
-  deleteNote(id: number) {
-    this.notesService.delete(id);
+  deleteNote(note: Note): void {
+    this.notesService.delete(this.notesService.getId(note));
+    this.filter(this.filterInputElRef.nativeElement.value);
+  }
+  generateNoteURL(note: Note): number {
+    return this.notesService.getId(note);
+  }
+  // tslint:disable-next-line:no-shadowed-variable
+  filter(query: string): void {
+    query = query.toLowerCase().trim();
+    let allResults: Note[] = new Array<Note>();
+    let terms: string[] = query.split(' ');
+    terms = this.removeDuplicates(terms);
+    terms.forEach(term => {
+      let results: Note[] = this.relevantNotes(term);
+      allResults = [...allResults, ...results];
+    });
+    let uniqueResults = this.removeDuplicates(allResults);
+    this.filteredNotes = uniqueResults;
+    this.sortByRelevancy(uniqueResults);
+  }
+  removeDuplicates(arr: Array<any>): Array<any> {
+    let uniqueResults: Set<string> = new Set<string>();
+    arr.forEach(e => uniqueResults.add(e));
+    return Array.from(uniqueResults);
+  }
+  // tslint:disable-next-line:no-shadowed-variable
+  relevantNotes(query: string): Array<Note> {
+    query = query.toLowerCase().trim();
+    let relevantNotes = this.notes.filter(
+      note =>
+        note.body.toLowerCase().includes(query) ||
+        note.title.toLowerCase().includes(query)
+    );
+    return relevantNotes;
+  }
+  sortByRelevancy(searchResults: Note[]) {
+    let noteCountObj: object = {};
+    searchResults.forEach(note => {
+      let noteID = this.notesService.getId(note);
+      if (noteCountObj[noteID]) {
+        noteCountObj[noteID] += 1;
+      } else {
+        noteCountObj[noteID] = 1;
+      }
+    });
+    this.filteredNotes = this.filteredNotes.sort((a: Note, b: Note) => {
+      let aID = this.notesService.getId(a);
+      let bID = this.notesService.getId(b);
+      let aCount = noteCountObj[aID];
+      let bCount = noteCountObj[bID];
+      return bCount - aCount;
+    });
   }
 }
