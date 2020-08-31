@@ -1,3 +1,4 @@
+import { MainViewComponent } from './kanban/main-view/main-view.component';
 import { EditItemModalComponent } from './budget/edit-item-modal/edit-item-modal.component';
 import { AddItemFormComponent } from './budget/add-item-form/add-item-form.component';
 import { BudgetItemCardComponent } from './budget/budget-item-list/budget-item-card/budget-item-card.component';
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { Game1Component } from './game1/game1.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
@@ -28,14 +30,16 @@ import { MatDialogModule } from '@angular/material/dialog';
     BudgetItemListComponent,
     BudgetItemCardComponent,
     AddItemFormComponent,
-    EditItemModalComponent
+    EditItemModalComponent,
+    MainViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

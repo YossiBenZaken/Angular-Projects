@@ -1,3 +1,4 @@
+import { MainViewComponent } from './kanban/main-view/main-view.component';
 import { MainPageComponent } from './budget/main-page/main-page.component';
 import { NoteDetailsComponent } from './notes/note-details/note-details.component';
 import { MainLayoutComponent } from './notes/main-layout/main-layout.component';
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'budget',
     component: MainPageComponent
+  },
+  {
+    path: 'kanban',
+    component: MainViewComponent
   },
   {
     path: 'notes',
