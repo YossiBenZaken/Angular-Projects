@@ -11,13 +11,15 @@ $pink: #fe76c2;
 $blue: #37c7f2;
 
 $light-red: #fff3f3;
-
+$dark: rgb(22, 28, 41);
+$light-grey: #f5f5f5;
 $light: #fafcff;
-
+$red: #dc3900;
 $green: #0bf387;
+$light-green: #bafacd;
 
 // Update Bulma's global variables
-$family-sans-serif: "Nunito", sans-serif;
+$family-sans-serif: 'Nunito', sans-serif;
 $primary: $purple;
 $link: $blue;
 
@@ -25,14 +27,13 @@ $link: $blue;
 $body-background-color: $light;
 $control-border-width: 2px;
 $input-border-color: transparent;
-$input-background-color:#f3f5fa;
+$input-background-color: #f3f5fa;
 $input-shadow: none;
-
-
 
 /* Global Styles */
 
-html, body {
+html,
+body {
   height: 100%;
   font-size: 18px !important;
 }

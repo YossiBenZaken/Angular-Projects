@@ -1,3 +1,4 @@
+import { MainPageComponent } from './budget/main-page/main-page.component';
 import { NoteDetailsComponent } from './notes/note-details/note-details.component';
 import { MainLayoutComponent } from './notes/main-layout/main-layout.component';
 import { NoteHomeComponent } from './notes/note-home/note-home.component';
@@ -7,7 +8,11 @@ import { NgModule } from '@angular/core';
 const routes: Routes = [
   {
     path: 'rockpaper',
-    component: Game1Component,
+    component: Game1Component
+  },
+  {
+    path: 'budget',
+    component: MainPageComponent
   },
   {
     path: 'notes',
@@ -15,22 +20,22 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: NoteHomeComponent,
+        component: NoteHomeComponent
       },
       {
         path: 'new',
-        component: NoteDetailsComponent,
+        component: NoteDetailsComponent
       },
       {
         path: ':id',
-        component: NoteDetailsComponent,
-      },
-    ],
-  },
+        component: NoteDetailsComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
